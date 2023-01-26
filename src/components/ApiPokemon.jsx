@@ -1,21 +1,15 @@
 import React, {useState} from "react";
+import axios from 'axios';
 
 const ApiPokemon = () => {
 
   const [pokemons, setPokemons] = useState([])
 
   const obtenerDatos = () => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
-          .then(response => {
-            return response.json();
-        }).then(response => {
-            setPokemons([...response.results])
-        }).catch(err=>{
-            console.log(err);
-        });
-
+        axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0').then(response => {
+          setPokemons([...response.data.results])
+        })
   };
-
 
   return (
     <div>
